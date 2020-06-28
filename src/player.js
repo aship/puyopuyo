@@ -426,8 +426,22 @@ class Player {
           this.puyoStatus.top = this.puyoStatus.y * Config.puyoImgHeight;
         }
         // 回すことが出来るので、回転後の情報をセットして回転状態にする
-
+        this.actionStartFrame = frame;
+        this.rotateBeforeLeft = x * Config.puyoImgHeight;
+        this.rotateAfterLeft = (x + cx) * Config.puyoImgHeight;
+        this.rotateFromRotation = this.puyoStatus.rotation;
         // 次の状態を先に設定しておく
+        this.puyoStatus.x += cx;
+        const distRotation = (this.puyoStatus.rotation + 90) % 360;
+        const dCombi = [
+          [1, 0],
+          [0, -1],
+          [-1, 0],
+          [0, 1],
+        ][distRotation / 90];
+        this.puyoStatus.dx = dCombi[0];
+        this.puyoStatus.dy = dCombi[1];
+        return "rotating";
       }
     }
     return "playing";
