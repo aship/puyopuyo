@@ -205,9 +205,11 @@ class Player {
     }
     if (!isBlocked) {
       // 下にブロックがないなら自由落下してよい。プレイヤー操作中の自由落下処理をする
-
-      // 下キーが押されているならもっと加速する
-
+      this.puyoStatus.top += Config.playerFallingSpeed;
+      if (isDownPressed) {
+        // 下キーが押されているならもっと加速する
+        this.puyoStatus.top += Config.playerDownSpeed;
+      }
       if (Math.floor(this.puyoStatus.top / Config.puyoImgHeight) != y) {
         // ブロックの境を超えたので、再チェックする
         // 下キーが押されていたら、得点を加算する
