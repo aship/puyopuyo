@@ -318,6 +318,11 @@ class Player {
 
       if (canMove) {
         // 動かすことが出来るので、移動先情報をセットして移動状態にする
+        this.actionStartFrame = frame;
+        this.moveSource = x * Config.puyoImgWidth;
+        this.moveDestination = (x + cx) * Config.puyoImgWidth;
+        this.puyoStatus.x += cx;
+        return "moving";
       }
     } else if (this.keyStatus.up) {
       // 回転を確認する
