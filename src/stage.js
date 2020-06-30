@@ -175,12 +175,22 @@ class Stage {
       for (let i = 0; i < direction.length; i++) {
         const dx = x + direction[i][0];
         const dy = y + direction[i][1];
-
-        // ステージの外にはみ出た
-
-        // ぷよの色が違う
-
+        if (
+          dx < 0 ||
+          dy < 0 ||
+          dx >= Config.stageCols ||
+          dy >= Config.stageRows
+        ) {
+          // ステージの外にはみ出た
+          continue;
+        }
+        const cell = this.board[dy][dx];
+        if (!cell || cell.puyo !== puyo) {
+          // ぷよの色が違う
+          continue;
+        }
         // そのぷよのまわりのぷよも消せるか確認する
+        checkSequentialPuyo(dx, dy);
       }
     };
 
