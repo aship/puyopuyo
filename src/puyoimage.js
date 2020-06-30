@@ -13,6 +13,16 @@ class PuyoImage {
       image.style.position = "absolute";
       this.puyoImages[i] = image;
     }
+
+    // 色をシャッフル
+    for (let i = this.puyoImages.length - 1; i >= 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [this.puyoImages[i], this.puyoImages[j]] = [
+        this.puyoImages[j],
+        this.puyoImages[i],
+      ];
+    }
+
     this.batankyuImage = document.getElementById("batankyu");
     this.batankyuImage.width = Config.puyoImgWidth * 6;
     this.batankyuImage.style.position = "absolute";
